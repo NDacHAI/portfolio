@@ -21,7 +21,7 @@ const Home = () => {
     };
 
     return (
-        <section id="home" className="pt-[80px] bg-white dark:bg-gray-900">
+        <section id="home" className="pt-[80px]">
             <div className="max-w-7xl mx-auto pb-12 pt-12 sm:pt-0">
                 <div className="grid items-center lg:grid-cols-2 gap-12 min-h-[calc(100vh-5em)]">
                     <div>

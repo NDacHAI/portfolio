@@ -1,9 +1,20 @@
 import { faCss3Alt, faHtml5, faJs, faReact } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { lazy, Suspense } from "react";
+
+// Lazy-loaded so three.js stays out of the main bundle
+const HeroScene = lazy(() => import("../HeroScene/HeroScene"));
 
 const Avatar = () => {
     return (
         <div className="relative flex justify-center overflow-visible max-h-[calc(100vh-15em)] sm:mt-10">
+            {/* 3D background */}
+            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[22rem] h-[22rem] sm:w-[28rem] sm:h-[28rem] lg:w-[34rem] lg:h-[34rem] pointer-events-none">
+                <Suspense fallback={null}>
+                    <HeroScene />
+                </Suspense>
+            </div>
+
             {/* Avatar image */}
             <div className="relative z-10">
                 <img

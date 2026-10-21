@@ -2,6 +2,7 @@ import { faCss, faFigma, faGit, faGithub, faHtml5, faJs, faNodeJs, faReact } fro
 import { faBolt, faDatabase, faKey, faLayerGroup, faPaperPlane, faWind } from "@fortawesome/free-solid-svg-icons";
 import { useState, useMemo } from "react";
 import SkillsCard from "../../components/SkillsCard/SkillsCard";
+import SkillsSphere from "../../components/SkillsSphere/SkillsSphere";
 import FadeInSection from "../../components/FadeInSection/FadeInSection";
 import SlideInSection from "../../components/SlideInSection/SlideInSection";
 
@@ -47,6 +48,13 @@ const Skills = () => {
                     </p>
                 </FadeInSection>
             </div>
+
+            <FadeInSection direction="up">
+                <SkillsSphere skills={skillsData} selected={selectedCat} onSelect={setSelectedCat} />
+                <p className="text-sm text-gray-500 dark:text-gray-400">
+                    Drag to spin, click a skill to jump to its category.
+                </p>
+            </FadeInSection>
 
             <div className="flex justify-center gap-4 my-6">
                 {categories.map((cat) => (

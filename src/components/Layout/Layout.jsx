@@ -1,5 +1,5 @@
 
-import { useContext } from "react";
+import { lazy, Suspense, useContext } from "react";
 import About from "../../pages/About/About";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
@@ -11,6 +11,9 @@ import Contact from "../../pages/Contact/Contact";
 import { ThemeContext } from "../../context/ThemeContext";
 import Testimonials from "../../pages/Testimonials/Testimonials";
 
+// Lazy-loaded so three.js stays out of the main bundle
+const ParticleField = lazy(() => import("../ParticleField/ParticleField"));
+
 const Layout = () => {
     const { theme } = useContext(ThemeContext);
 
@@ -18,12 +21,17 @@ const Layout = () => {
     return (
         <div
             className={`min-h-screen transition-colors duration-300 ${theme === "dark"
-                ? "bg-gray-900 text-white"
+                ? "bg-[#0b0f19] text-white"
                 : "bg-white text-gray-900"
                 } overflow-hidden`}
         >
+            <div className="fixed inset-0 pointer-events-none" aria-hidden="true">
+                <Suspense fallback={null}>
+                    <ParticleField />
+                </Suspense>
+            </div>
             <Header />
-            <div className="px-4 sm:px-0">
+            <div className="relative px-4 sm:px-0">
                 <Home />
                 <About />
                 <Projects />

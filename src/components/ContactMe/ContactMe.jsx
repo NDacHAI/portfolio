@@ -4,6 +4,7 @@ import { faLinkedin } from "@fortawesome/free-brands-svg-icons/faLinkedin";
 import { faInstagram } from "@fortawesome/free-brands-svg-icons/faInstagram";
 import { faFacebook } from "@fortawesome/free-brands-svg-icons/faFacebook";
 import { faArrowRight, faEnvelope, faPaperPlane } from "@fortawesome/free-solid-svg-icons";
+import TiltCard from "../TiltCard/TiltCard";
 
 const ContactMe = () => {
     const contact = [
@@ -17,9 +18,10 @@ const ContactMe = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-10">
             <ul className="w-full flex flex-col gap-4">
                 {contact.map((item, index) => (
-                    <li
+                    <TiltCard
+                        as="li"
                         key={index}
-                        className="w-full text-gray-900 dark:text-gray-100 transition-all duration-300 hover:-translate-y-1"
+                        className="w-full rounded-lg text-gray-900 dark:text-gray-100"
                     >
                         <a
                             href={item.href}
@@ -38,7 +40,7 @@ const ContactMe = () => {
                             </div>
                             <FontAwesomeIcon icon={faArrowRight} className="text-gray-600 dark:text-gray-400" />
                         </a>
-                    </li>
+                    </TiltCard>
                 ))}
             </ul>
             <div className="flex flex-col px-7 py-12 text-gray-900 dark:text-gray-100 border border-gray-900 dark:border-white rounded-lg gap-2">

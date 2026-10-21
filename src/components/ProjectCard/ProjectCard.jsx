@@ -1,5 +1,6 @@
 import { faCode, faExternalLink } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import useTilt from "../../hooks/useTilt";
 
 const ProjectCard = ({
     title,
@@ -12,8 +13,15 @@ const ProjectCard = ({
     demoLink,
     codeLink,
 }) => {
+    const tilt = useTilt();
+
     return (
-        <div className="flex h-full min-h-[480px] flex-col border rounded-lg p-6 bg-white dark:bg-gray-900 text-gray-900 dark:text-white hover:-translate-y-1 transition-all duration-300 text-left">
+        <div
+            {...tilt}
+            className="group relative flex h-full min-h-[480px] flex-col border rounded-lg p-6 bg-white dark:bg-gray-900 text-gray-900 dark:text-white hover:-translate-y-1 transition-all duration-200 ease-out text-left will-change-transform"
+        >
+            {/* Glare that follows the cursor */}
+            <div className="pointer-events-none absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[radial-gradient(circle_at_var(--gx,50%)_var(--gy,50%),rgba(17,24,39,0.08),transparent_45%)] dark:bg-[radial-gradient(circle_at_var(--gx,50%)_var(--gy,50%),rgba(255,255,255,0.12),transparent_45%)]" />
             <div className="flex min-h-[88px] items-start gap-3">
                 <div className="shrink-0">
                     <FontAwesomeIcon

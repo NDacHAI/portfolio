@@ -12,6 +12,12 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import FadeInSection from "../../components/FadeInSection/FadeInSection";
 import SlideInSection from "../../components/SlideInSection/SlideInSection";
+import { lazy, Suspense, useContext } from "react";
+import useTilt from "../../hooks/useTilt";
+import { ThemeContext } from "../../context/ThemeContext";
+
+// Lazy-loaded so three.js stays out of the main bundle
+const ExperienceScene = lazy(() => import("../../components/ExperienceScene/ExperienceScene"));
 
 const workExperiences = [
     {
@@ -41,11 +47,24 @@ const responsibilityIcons = [
     faPeopleGroup,
 ];
 
+// Article with its own tilt ref, so every card in the list tilts independently
+const TiltArticle = ({ children, className }) => {
+    const tilt = useTilt();
+    return (
+        <article {...tilt} className={className}>
+            {children}
+        </article>
+    );
+};
+
 const Experience = () => {
+    const { theme } = useContext(ThemeContext);
+
+    // In dark mode the band blends with the page so the particle background shows through
     return (
         <section
             id="experience"
-            className="mx-[-1rem] bg-slate-900 py-14 px-4 text-white sm:mx-0 sm:px-6 lg:px-8 scroll-mt-[80px]"
+            className={`mx-[-1rem] ${theme === "dark" ? "bg-transparent" : "bg-slate-900"} py-14 px-4 text-white sm:mx-0 sm:px-6 lg:px-8 scroll-mt-[80px]`}
         >
             <div className="mx-auto max-w-7xl">
                 <FadeInSection direction="up">
@@ -57,13 +76,17 @@ const Experience = () => {
                     </div>
                 </FadeInSection>
 
-                <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+                <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-2">
                     {workExperiences.map((item, index) => (
                         <SlideInSection
                             key={item.title}
                             direction={index % 2 === 0 ? "left" : "right"}
                         >
-                            <article className="h-full rounded-lg border border-white/80 bg-slate-900 p-6 text-left transition-all duration-300 hover:-translate-y-1 hover:border-white">
+                            <TiltArticle
+                                className="group relative h-full rounded-lg border border-white/80 bg-slate-900 p-6 text-left transition-all duration-200 ease-out hover:-translate-y-1 hover:border-white will-change-transform"
+                            >
+                                {/* Glare that follows the cursor */}
+                                <div className="pointer-events-none absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[radial-gradient(circle_at_var(--gx,50%)_var(--gy,50%),rgba(255,255,255,0.12),transparent_45%)]" />
                                 <div className="mb-6 flex items-start gap-4">
                                     <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-lg bg-white text-3xl text-slate-900">
                                         <FontAwesomeIcon icon={item.icon} />
@@ -117,9 +140,22 @@ const Experience = () => {
                                         ))}
                                     </div>
                                 </div>
-                            </article>
+                            </TiltArticle>
                         </SlideInSection>
                     ))}
+
+                    <FadeInSection direction="up">
+                        <div className="h-[320px] sm:h-[420px]" aria-hidden="true">
+                            <Suspense fallback={null}>
+                                <ExperienceScene />
+                            </Suspense>
+                        </div>
+                        <div className="flex justify-center gap-6 text-xs font-semibold uppercase tracking-widest text-slate-400">
+                            <span>UI</span>
+                            <span>API</span>
+                            <span>Database</span>
+                        </div>
+                    </FadeInSection>
                 </div>
             </div>
         </section>

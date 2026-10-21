@@ -44,9 +44,11 @@ const About = () => {
                 )}
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-center py-4 min-h-[calc(100vh-5rem)]">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center py-12 min-h-[calc(100vh-5rem)]">
+                {/* Plain wrappers keep SlideInSection's h-full from stretching the column */}
+                <div>
                 {randomWrapper(
-                    <div className="w-full flex justify-center lg:justify-start mt-12">
+                    <div className="w-full flex justify-center">
                         <img
                             alt="Nguyen Dac Hai"
                             className="w-sm max-w-md rounded-xl shadow-lg object-cover 
@@ -58,7 +60,9 @@ const About = () => {
                     </div>,
                     "image"
                 )}
+                </div>
 
+                <div>
                 {randomWrapper(
                     <div className="w-full text-gray-900 dark:text-white">
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
@@ -113,6 +117,7 @@ const About = () => {
                     </div>,
                     "content"
                 )}
+                </div>
             </div>
         </section>
     );

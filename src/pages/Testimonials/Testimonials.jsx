@@ -6,6 +6,7 @@ import ModelTestimonial from "../../components/ModelTestimonial/ModelTestimonial
 import { getTestimonials } from "../../firebaseService";
 import FadeInSection from "../../components/FadeInSection/FadeInSection";
 import SlideInSection from "../../components/SlideInSection/SlideInSection";
+import TiltCard from "../../components/TiltCard/TiltCard";
 
 const Testimonials = () => {
     const [comments, setComments] = useState([]);
@@ -72,7 +73,7 @@ const Testimonials = () => {
                         <div className="p-6">
                             {comments.map((item, idx) => (
                                 <FadeInSection key={item.id} direction={idx % 2 === 0 ? "left" : "right"}>
-                                    <div className="p-4 text-left border border-gray-300 bg-white text-gray-900 shadow dark:bg-gray-900 dark:text-white rounded-lg mb-4">
+                                    <TiltCard maxTilt={6} className="p-4 text-left border border-gray-300 bg-white text-gray-900 shadow dark:bg-gray-900 dark:text-white rounded-lg mb-4">
                                         <FontAwesomeIcon icon={faQuoteLeft} className="text-2xl text-gray-600" />
                                         <div className="text-sm my-2">{item.comment}</div>
                                         <div className="flex gap-0.5">
@@ -89,7 +90,7 @@ const Testimonials = () => {
                                                 <span>{item.major}</span>
                                             </div>
                                         </div>
-                                    </div>
+                                    </TiltCard>
                                 </FadeInSection>
                             ))}
                         </div>

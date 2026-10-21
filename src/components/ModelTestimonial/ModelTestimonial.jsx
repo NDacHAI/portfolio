@@ -1,7 +1,8 @@
 import { faEnvelope, faMessage, faPaperPlane } from "@fortawesome/free-regular-svg-icons";
 import { faBriefcase, faX } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { faAddressCard } from "@fortawesome/free-solid-svg-icons";
 import { addTestimonial } from "../../firebaseService";
 
@@ -12,6 +13,19 @@ const ModelTestimonial = ({ open, onClose, onSave }) => {
         major: "",
         comment: "",
     });
+
+    // Lock page scroll and allow Escape to close while the popup is open
+    useEffect(() => {
+        if (!open) return;
+        const handleKey = (e) => e.key === "Escape" && onClose();
+        const overflow = document.body.style.overflow;
+        document.body.style.overflow = "hidden";
+        window.addEventListener("keydown", handleKey);
+        return () => {
+            document.body.style.overflow = overflow;
+            window.removeEventListener("keydown", handleKey);
+        };
+    }, [open, onClose]);
 
     if (!open) return null;
 
@@ -30,9 +44,10 @@ const ModelTestimonial = ({ open, onClose, onSave }) => {
         }
     };
 
-    return (
-        <div className="fixed inset-0 bg-gray-600/10 backdrop-blur-sm flex items-center justify-center z-50">
-            <div className="bg-white dark:bg-gray-900 rounded-lg w-md mx-auto p-4 shadow relative flex flex-col">
+    // Rendered into <body> so a transformed parent section can't trap the fixed overlay
+    return createPortal(
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-[100] px-4">
+            <div className="bg-white dark:bg-gray-900 text-gray-900 dark:text-white rounded-lg w-md max-w-full mx-auto p-4 shadow-2xl relative flex flex-col">
                 <FontAwesomeIcon icon={faX} className="absolute right-5 cursor-pointer" onClick={onClose} />
                 <div className="flex flex-col justify-center items-center mt-4">
                     <FontAwesomeIcon icon={faMessage} className="bg-gray-900 text-white dark:bg-white dark:text-gray-900 p-4 rounded-full " />
@@ -108,7 +123,8 @@ const ModelTestimonial = ({ open, onClose, onSave }) => {
                     </button>
                 </div>
             </div>
-        </div>
+        </div>,
+        document.body
     );
 };
 

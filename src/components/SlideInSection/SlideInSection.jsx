@@ -18,14 +18,16 @@ const SlideInSection = ({ children, direction = "left" }) => {
         right: "translate-x-24",
     };
 
+    // Observe a static wrapper: watching the moving element itself can flip it in and out forever
     return (
-        <div
-            ref={ref}
-            className={`inline-block h-full w-full text-center transition-all duration-1000 ease-out
-            ${isVisible ? "opacity-100 translate-y-0" : `opacity-0 ${directionClasses[direction]}`}
-        `}
-        >
-            {children}
+        <div ref={ref} className="inline-block h-full w-full">
+            <div
+                className={`h-full w-full text-center transition-all duration-1000 ease-out
+                ${isVisible ? "opacity-100 translate-y-0" : `opacity-0 ${directionClasses[direction]}`}
+            `}
+            >
+                {children}
+            </div>
         </div>
     );
 

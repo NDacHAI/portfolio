@@ -3,6 +3,7 @@ import { faGithub } from "@fortawesome/free-brands-svg-icons/faGithub";
 import { faLinkedin } from "@fortawesome/free-brands-svg-icons/faLinkedin";
 import { faInstagram } from "@fortawesome/free-brands-svg-icons/faInstagram";
 import { faFacebook } from "@fortawesome/free-brands-svg-icons/faFacebook";
+import Magnetic from "../Magnetic/Magnetic";
 
 const SocialLinks = () => {
 
@@ -17,6 +18,7 @@ const SocialLinks = () => {
         <ul className="flex items-center gap-3">
             {contact.map((link, index) => (
                 <li key={index}>
+                    <Magnetic strength={0.4} radius={30}>
                     <a href={link.href} target="_blank" rel="noopener noreferrer">
                         <div
                             className="
@@ -31,6 +33,7 @@ const SocialLinks = () => {
                             <FontAwesomeIcon className="w-[20px] h-[20px]" icon={link.icon} />
                         </div>
                     </a>
+                    </Magnetic>
                 </li>
             ))}
         </ul>
