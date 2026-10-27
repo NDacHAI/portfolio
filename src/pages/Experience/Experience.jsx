@@ -22,24 +22,27 @@ const ExperienceScene = lazy(() => import("../../components/ExperienceScene/Expe
 const workExperiences = [
     {
         icon: faBuilding,
-        title: "Fullstack Intern Developer",
-        role: "Enterprise HRM System",
+        title: "Intern Developer",
+        role: "HRM (Human Resource Management) System",
         project: "Visnam Joint Stock Company",
-        period: "03/2025 - Present",
+        period: "03/2026 - 07/2026",
         location: "Work Experience",
         responsibilities: [
-            "Built and maintained HRM features including employees, leave, payroll, and access control.",
-            "Developed RESTful APIs and database architecture using ASP.NET Core and EF Core.",
-            "Implemented JWT, RBAC, and workflow automation features.",
+            "Built RESTful APIs for organization, employee, leave, work shift and scheduling modules with ASP.NET Core & EF Core.",
+            "Worked with PostgreSQL: entity relationships, validation and EF Core migrations.",
+            "Implemented RBAC and permission-based authorization using ASP.NET Core Middleware.",
+            "Contributed to a multi-tenant architecture with separate databases per organization.",
+            "Developed employee management, shift scheduling and leave request approval workflows.",
+            "Built Blazor/Razor UIs with forms, tables, validation, API integration and file uploads.",
         ],
-        techStack: [".NET", "Blazor", "PostgreSQL", "EF Core", "REST API", "JWT", "Git"],
+        techStack: [".NET", "ASP.NET Core", "Blazor", "PostgreSQL", "EF Core", "REST API", "Git"],
     },
 ];
 
 const responsibilityIcons = [
+    faServer,
     faDatabase,
     faLock,
-    faServer,
     faDiagramProject,
     faCheck,
     faNetworkWired,
