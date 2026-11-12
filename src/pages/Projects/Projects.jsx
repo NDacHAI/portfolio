@@ -17,7 +17,7 @@ const projectsData = [
             'Attendance tracking and estimated payroll reports',
         ],
         techStack: ['React', 'TypeScript', 'Tailwind CSS', 'NestJS', 'TypeORM', 'MySQL', 'JWT'],
-        demoLink: 'https://ndh-shiftly.vercel.app/',
+        demoLink: 'https://shiftly.io.vn/',
         codeLink: 'https://github.com/NDacHAI/Shiftly',
         icon: faCalendarCheck,
     },
